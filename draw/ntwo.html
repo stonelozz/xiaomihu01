@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>寻宝</title>
+</head>
+<meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <meta name="full-screen" content="true" />
+
+    <meta name="screen-orientation" content="portrait" />
+
+    <meta name="x5-fullscreen" content="true" />
+
+    <meta name="360-fullscreen" content="true" /> 
+
+
+
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./css/main.css" type="text/css">
+
+    <script src="./js/jquery-3.4.1.min.js"></script>
+
+    <script src="./js/main.js"></script>
+
+
+
+    <script type="text/javascript">
+
+
+
+        var phoneWidth = parseInt(window.screen.width);
+
+        var phoneScale = phoneWidth / 640;
+
+        var ua = navigator.userAgent;
+
+        document.write('<meta name="viewport" content="width=640, minimum-scale=' + phoneScale + ', maximum-scale=' + phoneScale + ',user-scalable=no">');
+
+
+    </script>
+
+<style type="text/css">
+
+/*初始化文件*/
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0;background: #00BFF3; }
+mark{background: inherit;color: inherit}
+body { background:#fff; color:#fff; font-family: 'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif; }
+h1, h2, h3, h4, h5, h6, p{ font-weight:normal; font-size:100%;}
+a { color:#fff; text-decoration:none; }
+a:hover{text-decoration: none !important;}
+img { border:none; }
+ol,ul,li { list-style:none; }
+i{ font-style: normal}
+input, textarea, select, button { font:14px Verdana,Helvetica,Arial,sans-serif; border: 1px solid #999; outline: none; }
+table { border-collapse:collapse; }
+button{cursor: pointer;  outline: none;  border: 0;}
+@media all and (min-width:310px){html{font-size: 84px;}}
+@media all and (min-width:370px){html{font-size: 100px;}}
+@media all and (min-width:410px){html{font-size: 110px;}}
+.page_mengceng{
+	position: fixed;
+	top: 0;
+	display: none;
+	z-index: 1000;
+	left: 0;
+    height: 1008px;
+    width: 640px;
+}
+.card_box{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: flex;
+	background: palegoldenrod;
+	justify-content: center;
+	align-items: center;
+}
+.card_border{
+	width: 3.4rem;
+	height: 3.4rem;
+	font-size: 0;
+}
+.card{
+	height: 0.73rem;
+    width: 0.73rem;
+    cursor: pointer;
+	display: inline-block;
+	box-shadow: 0.05rem 0.05rem rgba(0,0,0,0.5);
+	overflow: hidden;
+	border-radius: 0.10rem;
+	margin-left: 0.10rem;
+	margin-top: 0.10rem;
+}
+.card_backImg{
+	position: relative;
+	z-index: 1;
+	height: 0.73rem;
+    width: 0.73rem;
+}
+.card_img{
+	position: absolute;
+	border-radius: 0.10rem;
+	height: 0.73rem;
+    width: 0.73rem;
+}
+.card_IndexNum{
+	opacity: 0;
+	z-index: -1;
+	position: relative;
+}
+.card_backImg_active{
+	margin-top: -0.73rem;
+	margin-left: -0.73rem;
+	opacity: 0;
+	animation: active 0.3s;
+}
+@keyframes active {
+	0% {
+		margin-top: 0rem;
+		margin-left: 0rem;
+		opacity: 1;
+	}
+	100% {
+        margin-top: -0.73rem;
+        margin-left: -0.73rem;
+        opacity: 0;
+	}
+}
+.card_backImg_Unactive{
+	margin-top: 0rem;
+	margin-left: 0rem;
+	opacity: 1;
+	animation: unactive 0.3s;
+}
+@keyframes unactive{
+	0% {
+		margin-top: -0.73rem;
+        margin-left: -0.73rem;
+        opacity: 0;
+	}
+	100% {
+        margin-top: 0rem;
+		margin-left: 0rem;
+		opacity: 1;
+	}
+}
+.card_grade{
+	position: absolute;
+	font-size: 0.25rem;
+	top: 0.10rem;
+	right: 0.20rem;
+	color: red;
+}
+</style>
+
+<body>
+
+<div class="card_box" ><img src="images/tk.jpg" style="height: 100%;width: 100%;" />
+	<div class="card_grade"><!--<span class="grade_box"></span>--><span id="sa1">材料找寻中...</span></div>
+	<div class="page_mengceng"></div>
+	
+	<div class="card_border" style="position: absolute;left: 25%;top:40% ;"></div>
+	<p id="neirong"></p><a href="../h1/h1.html" id="k0"><img src='./images/mupai.gif' style="position:absolute ;left: 3%;top: 65%;height: 50px;width: 100px;"/></a>
+</div>
+
+</body>
+
+<!-- <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script> -->
+<script src="./jquery.js"></script>
+
+<script type="text/javascript">
+	k0=document.getElementById("k0")
+	k0.style.visibility="hidden"
+var ary=[0,1,2,3,4,5,6,7];
+ary.push(...ary);
+var num=ary.length;
+var time=ary.length;
+var DomAry=[]
+var dobleAry_index=[];
+var dobleAry_Num=[];
+var grade=0;
+
+(function(){
+    for(var j=0;j<time;j++){
+    	 $(".grade_box").html(grade)
+		 var random=Math.floor(Math.random()*num);
+		 for(var i=0;i<ary.length;i++){
+		 if(random==i){
+		 DomAry.push(ary[i]);
+		 $(".card_border").append("<div class='card'><div class='card_IndexNum'>"+ary[i]+"</div><img src='images/modle"+ary[i]+".jpg' class='card_img'><img src='images/back1.jpg' class='card_backImg'></div>")
+		 ary.splice(i,1);
+		 num--
+		}
+	  }
+	}
+})()
+
+var el=document.getElementsByClassName("card_backImg");
+for(var i=0;i<el.length;i++){
+	var a=el[i];
+	a.index=i;
+	a.onclick=function() {
+		$(this).removeClass('card_backImg_Unactive');
+	    $(this).addClass('card_backImg_active');
+	    dobleAry_Num.push($(this).siblings(".card_IndexNum").html())
+	    dobleAry_index.push($(this).parent().index())
+	    if(dobleAry_index.length==2){
+	       if(dobleAry_Num[0]==dobleAry_Num[1]&&dobleAry_index[0]!=dobleAry_index[1]){
+	       		 var allGrade=++grade
+                 $(".grade_box").html(allGrade)
+                 if(allGrade==8){
+                 	document.getElementById("sa1").innerHTML="找寻完毕拿上面膜返回王宫"
+                 	k0.style.visibility="initial"
+                 }
+		         dobleAry_Num.length=0
+			     dobleAry_index.length=0
+	       }else{
+	       	  $(".page_mengceng").show();
+	          setTimeout(function(){
+	              $(".page_mengceng").hide();
+	              $(".card").eq(dobleAry_index[0]).children(".card_backImg").addClass('card_backImg_Unactive')
+	              $(".card").eq(dobleAry_index[1]).children(".card_backImg").addClass('card_backImg_Unactive')
+			      dobleAry_Num.length=0
+				  dobleAry_index.length=0
+			  },500)
+	       }
+	    }
+	}
+}
+
+</script>
+
+</html>

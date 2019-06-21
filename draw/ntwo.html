@@ -60,7 +60,8 @@ button{cursor: pointer;  outline: none;  border: 0;}
 @media all and (min-width:370px){html{font-size: 100px;}}
 @media all and (min-width:410px){html{font-size: 110px;}}
 .page_mengceng{
-	position: fixed;
+	/* position: fixed; */
+	position: relative;
 	top: 0;
 	display: none;
 	z-index: 1000;
@@ -81,6 +82,7 @@ button{cursor: pointer;  outline: none;  border: 0;}
 	width: 3.4rem;
 	height: 3.4rem;
 	font-size: 0;
+
 }
 .card{
 	height: 0.73rem;
@@ -111,19 +113,19 @@ button{cursor: pointer;  outline: none;  border: 0;}
 	position: relative;
 }
 .card_backImg_active{
-/* 	margin-top: -0.73rem;
-	margin-left: -0.73rem; */
+	margin-top: -0.73rem;
+	margin-left: -0.73rem;
 	opacity: 0;
 	animation: active 0.3s;
 }
 @keyframes active {
 	0% {
-/* 		margin-top: 0rem;
+		/* margin-top: 0rem;
 		margin-left: 0rem; */
 		opacity: 1;
 	}
 	100% {
-/*         margin-top: -0.73rem;
+        /* margin-top: -0.73rem;
         margin-left: -0.73rem; */
         opacity: 0;
 	}
@@ -136,12 +138,12 @@ button{cursor: pointer;  outline: none;  border: 0;}
 }
 @keyframes unactive{
 	0% {
-/* 		margin-top: -0.73rem;
+		/* margin-top: -0.73rem;
         margin-left: -0.73rem; */
         opacity: 0;
 	}
 	100% {
-/*         margin-top: 0rem;
+        /* margin-top: 0rem;
 		margin-left: 0rem; */
 		opacity: 1;
 	}
@@ -158,7 +160,9 @@ button{cursor: pointer;  outline: none;  border: 0;}
 <body>
 
 <div class="card_box" ><img src="images/tk.jpg" style="height: 100%;width: 100%;" />
-<!-- 	<div class="card_grade"><!--<span class="grade_box"></span><span id="sa1">材料找寻中...</span></div> -->
+	 <div class="card_grade">
+		<!-- <span class="grade_box"></span><span id="sa1">材料找寻中...</span> -->
+	</div> 
 	<div class="page_mengceng"></div>
 	
 	<div class="card_border" style="position: absolute;left: 25%;top:40% ;"></div>
@@ -166,7 +170,9 @@ button{cursor: pointer;  outline: none;  border: 0;}
 </div>
 
 </body>
-<script src="jquery.js"></script>
+
+<!-- <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script> -->
+<script src="./jquery.js"></script>
 
 <script type="text/javascript">
 	k0=document.getElementById("k0")
@@ -241,4 +247,3 @@ for(var i=0;i<el.length;i++){
 </script>
 
 </html>
-		
